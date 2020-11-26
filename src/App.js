@@ -27,14 +27,14 @@ export default function App () {
     
                 return 0
             })
-            setSortingBy('order')
-        } else {
+            setSortingBy('days left')
+        } else if (campaignKey === 'daysLeft') {
             newCampaigns.sort(function(a, b) {
-                if (a.order < b.order) {
+                if (a.days_remaining < b.days_remaining) {
                     return -1
                 }
                 
-                if (a.order > b.order) {
+                if (a.days_remaining > b.days_remaining) {
                     return 1
                 }
     
@@ -62,7 +62,7 @@ export default function App () {
                     {
                         sortingBy === 'donation goal' ?
                         <Button variant='grey' onClick={() => sorting('donationGoal')}>Sorting By Donation Goal</Button> :
-                        <Button variant='grey' onClick={() => sorting()}>Back</Button>
+                        <Button variant='grey' onClick={() => sorting('daysLeft')}>Sorting By Days Left</Button>
                     }
                 </Col>
             </Row>
