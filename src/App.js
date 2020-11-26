@@ -15,33 +15,27 @@ export default function App () {
 
     function sorting(campaignKey) {
         const newCampaigns = JSON.parse(JSON.stringify(campaigns))
+        let key = ''
         if(campaignKey === 'donationGoal') {
-            newCampaigns.sort(function(a, b) {
-                if (a.donation_target < b.donation_target) {
-                    return -1
-                }
-                
-                if (a.donation_target > b.donation_target) {
-                    return 1
-                }
-    
-                return 0
-            })
+            key = 'donation_target'
             setSortingBy('days left')
         } else if (campaignKey === 'daysLeft') {
-            newCampaigns.sort(function(a, b) {
-                if (a.days_remaining < b.days_remaining) {
-                    return -1
-                }
-                
-                if (a.days_remaining > b.days_remaining) {
-                    return 1
-                }
-    
-                return 0
-            })
+            key = 'days_remaining'
             setSortingBy('donation goal')
         }
+
+        newCampaigns.sort(function(a, b) {
+            if (a[key] < b[key]) {
+                return -1
+            }
+            
+            if (a[key] > b[key]) {
+                return 1
+            }
+
+            return 0
+        })
+
         dispatch(setCampaigns(newCampaigns))
     }
 
